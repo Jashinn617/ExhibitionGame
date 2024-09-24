@@ -1,0 +1,4 @@
+Damage,20,1
+ItemGet,5,1
+GameEndDead,10,7
+EnemyDead,10,2.5

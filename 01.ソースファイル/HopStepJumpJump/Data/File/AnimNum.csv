@@ -1,0 +1,6 @@
+CharacterName,Idle,Walk,JumpStart,JumpIdle,Dash,Knockback
+Player,3,14,6,7,11,2
+Bee,2,2,2,2,2,2
+Crab,5,8,8,8,8,8
+Ogre,5,8,8,8,8,8
+Skull,5,8,8,8,8,8
