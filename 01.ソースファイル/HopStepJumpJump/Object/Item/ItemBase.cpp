@@ -7,7 +7,6 @@
 #include "../Circle.h"
 
 #include "../../Util/Time.h"
-#include "../../Util/Input.h"
 #include "../../Util/SoundManager.h"
 
 #include "../../Shader/ToonShader.h"
@@ -75,7 +74,7 @@ void ItemBase::Init()
 	/*処理無し*/
 }
 
-void ItemBase::Update(Input& input)
+void ItemBase::Update()
 {
 	// 移動ベクトルの計算
 	m_info.vec = MoveUpdate();

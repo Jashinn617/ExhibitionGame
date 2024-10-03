@@ -1,15 +1,13 @@
 #pragma once
 #include "DxLib.h"
 
-class Input;
-
 class MoveDirectionVec
 {
 public:
 	MoveDirectionVec();
 	~MoveDirectionVec();
 
-	void Update(Input& input_);
+	void Update();
 
 	/// <summary>
 	/// ˆÚ“®•ûŒü‚ğİ’è‚·‚é

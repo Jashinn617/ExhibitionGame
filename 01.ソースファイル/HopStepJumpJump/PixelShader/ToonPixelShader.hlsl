@@ -49,6 +49,8 @@ PS_OUTPUT main(PS_INPUT input)
      //ライトの向きを設定
     float3 lightDir = LightDir;
     lightDir = normalize(lightDir);
+    // 今のままだとライトが下から向けられるため、y方向を反転する
+    lightDir.y *= -1;
 
     //法線情報を正規化
     float3 n = normalize(input.VNormal);

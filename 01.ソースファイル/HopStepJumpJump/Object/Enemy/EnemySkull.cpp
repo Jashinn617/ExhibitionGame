@@ -13,7 +13,7 @@
 
 namespace
 {
-	constexpr float kModelScalse = 0.3;	// モデルスケール
+	constexpr float kModelScalse = 0.3f;	// モデルスケール
 	constexpr float kEnemySize = 20;	// サイズ
 	constexpr float kHeight = 20.0f;	// 高さ
 }

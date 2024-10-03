@@ -8,7 +8,6 @@ class ObjectBase;
 class Model;
 class Circle;
 class Time;
-class Input;
 
 class ItemBase : public CharacterBase
 {
@@ -18,7 +17,7 @@ public:
 	virtual ~ItemBase();
 
 	virtual void Init();
-	virtual void Update(Input& input) override;
+	virtual void Update() override;
 
 	virtual void Draw(std::shared_ptr<ToonShader> pToonShader);
 

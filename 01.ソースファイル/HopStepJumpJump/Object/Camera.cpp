@@ -6,8 +6,6 @@
 
 #include "Player/Player.h"
 
-
-#include "../Util/Input.h"
 #include "../Util/Time.h"
 #include "../Util/Easing.h"
 
@@ -47,7 +45,7 @@ namespace
 	constexpr float kStageClearStartAngleH = 0.0f;	// ステージクリア時の最初のカメラの角度H
 	constexpr float kStageClearStartAngleV = 0.15f;	// ステージクリア時の最初のカメラの角度V
 	constexpr float kStageClearEndAngleH = DX_TWO_PI_F + DX_PI_F + DX_PI_F * 2.0f;	// ステージクリア時の最後のカメラの角度H
-	constexpr float kStageClearEndAngleV = -0.35;	// ステージクリア時の最後のカメラの角度V
+	constexpr float kStageClearEndAngleV = -0.35f;	// ステージクリア時の最後のカメラの角度V
 	constexpr float kEasingTime = 80.0f;	// イージングにかかる時間
 	constexpr float kStageClearCameraTargtHeight = kCameraPlayerTargetHeight * 0.5f;	// ステージクリア時の注視点の高さ
 	constexpr float kStageClearTargetMoveLength = 43.0f;	// ステージクリア時のターゲットの移動量

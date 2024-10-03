@@ -13,7 +13,7 @@ namespace
 	constexpr float kMoveSinSpeed = 0.03f;	// 上下移動の速度
 	constexpr float kMoveSwing = 0.1f;		// 上下移動の移動幅
 	constexpr float kAngleSpeed = 0.05f;		// 回転スピード
-	constexpr float kModelScalse = 0.21;	// モデルスケール
+	constexpr float kModelScalse = 0.21f;	// モデルスケール
 	constexpr float kItemSize = 13;			// サイズ
 	constexpr float kHeight = -10.0f;		// 高さ
 }

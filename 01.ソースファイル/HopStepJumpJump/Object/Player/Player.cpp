@@ -8,7 +8,6 @@
 #include "../Camera.h"
 #include "../Circle.h"
 
-#include "../../Util/Input.h"
 #include "../../Util/Pad.h"
 #include "../../Util/Time.h"
 #include "../../Util/MoveDirectionVec.h"
@@ -149,7 +148,7 @@ void Player::Init()
 	/*処理無し*/
 }
 
-void Player::Update(Input& input)
+void Player::Update()
 {
 	// ステージクリア時
 	if (m_isStageClear)
@@ -159,16 +158,13 @@ void Player::Update(Input& input)
 	}
 
 	// 状態更新
-	m_pState->Update(input);
+	m_pState->Update();
 
 	// 移動更新
-	m_info.vec = MoveUpdate(input);
+	m_info.vec = MoveUpdate();
 
 	// 重力を考慮した更新
 	GravityUpdate();
-
-	//// 攻撃を受けた時のシェーダの更新
-	//m_pDamageShader->Update();
 
 	// 攻撃を受けた時
 	if (m_isDamage)
@@ -337,7 +333,7 @@ void Player::AngleUpdate()
 	SmoothAngle(m_angle, nextAngle);
 }
 
-void Player::MoveDirectionUpdate(Input& input)
+void Player::MoveDirectionUpdate()
 {
 	if (m_isGameEnd) return;
 
@@ -348,7 +344,7 @@ void Player::MoveDirectionUpdate(Input& input)
 	MoveDirectionVec moveVec;
 
 	// 移動方向アップデート
-	moveVec.Update(input);
+	moveVec.Update();
 
 	// 進みたい方向と今の方向の線形補完
 	m_moveDirectVec = VAdd(VScale(m_moveDirectVec, kNowVecNum),
@@ -358,7 +354,7 @@ void Player::MoveDirectionUpdate(Input& input)
 	m_moveDirectVec.y = 0.0f;
 }
 
-VECTOR Player::MoveUpdate(Input& input)
+VECTOR Player::MoveUpdate()
 {
 	if (m_isGameEnd) return VGet(0.0f, 0.0f, 0.0f);
 
@@ -367,7 +363,7 @@ VECTOR Player::MoveUpdate(Input& input)
 	if (m_moveSpeed == 0.0f)return VGet(0.0f, 0.0f, 0.0f);
 
 	// 移動方向の更新
-	MoveDirectionUpdate(input);
+	MoveDirectionUpdate();
 	// 角度の更新
 	AngleUpdate();
 

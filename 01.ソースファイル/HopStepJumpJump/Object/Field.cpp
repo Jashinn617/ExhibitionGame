@@ -28,6 +28,7 @@ Field::Field(Game::Stage stage)
 
 Field::~Field()
 {
+	/*ˆ—–³‚µ*/
 }
 
 void Field::Init()
@@ -35,7 +36,7 @@ void Field::Init()
 	/*ˆ—–³‚µ*/
 }
 
-void Field::Update(Input& input)
+void Field::Update()
 {
 	m_pModel->Update();
 }

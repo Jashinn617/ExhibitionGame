@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update(Input& input);
+	void Update();
 
 	/// <summary>
 	/// ダメージを受けた
@@ -86,24 +86,24 @@ private:	// 関数
 	/// <summary>
 	/// 待機状態への変更
 	/// </summary>
-	void StateTransitionIdle(Input& input);
+	void StateTransitionIdle();
 	/// <summary>
 	/// 歩き状態への変更
 	/// </summary>
-	void StateTransitionWalk(Input& input);
+	void StateTransitionWalk();
 	/// <summary>
 	/// ダッシュ状態への変更
 	/// </summary>
-	void StateTransitionDash(Input& input);
+	void StateTransitionDash();
 	/// <summary>
 	/// ジャンプ状態への変更
 	/// </summary>
-	void StateTransitionJump(Input& input);
+	void StateTransitionJump();
 
 	/// <summary>
 	/// 各状態遷移
 	/// </summary>
-	void StateTransition(Input& input);
+	void StateTransition();
 
 	/// <summary>
 	/// 状態変更

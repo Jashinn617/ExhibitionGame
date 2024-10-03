@@ -13,7 +13,6 @@
 #include "../Object/Player/Player.h"
 #include "../Object/Camera.h"
 
-#include "../Util/Input.h"
 #include "../Util/Time.h"
 #include "../Util/Collision.h"
 
@@ -61,7 +60,7 @@ ObjectManager::~ObjectManager()
 	}
 }
 
-void ObjectManager::Update(Input& input)
+void ObjectManager::Update()
 {
 	// オブジェクト配列の最初のイテレータを取得する
 	std::list<ObjectBase*>::iterator it = m_pObject.begin();
@@ -69,7 +68,7 @@ void ObjectManager::Update(Input& input)
 	{
 		// オブジェクトの更新
 		auto obj = (*it);
-		obj->Update(input);
+		obj->Update();
 
 		// オブジェクトが存在していない場合
 		if (!obj->GetInfo().isExist)
@@ -158,7 +157,11 @@ void ObjectManager::Draw()
 	// オブジェクトの描画
 	for (auto& obj : m_pObject)
 	{
-		obj->Draw(m_pToonShader);
+		// カメラ外にいるときは描画をしない
+		if (!CheckCameraViewClip(obj->GetInfo().pos))
+		{
+			obj->Draw(m_pToonShader);
+		}
 	}
 
 	// シャドウマップの書き込み開始

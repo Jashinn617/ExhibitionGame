@@ -5,7 +5,6 @@
 #include <memory>
 #include <vector>
 
-class Input;
 class Circle;
 class Player;
 class Time;

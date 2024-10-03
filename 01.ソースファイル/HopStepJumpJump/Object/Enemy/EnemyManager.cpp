@@ -21,22 +21,15 @@ namespace
 
 
 EnemyManager::EnemyManager(Game::Stage stage, ObjectManager* pObjectManager):
-	m_isSpown(true),
-	m_isClear(false),
 	m_pObjectManager(pObjectManager)
 {
 	// レベルによって出現する敵を変える
 	m_pSpown = std::make_shared<SpownEnemy>(kSpownFile[static_cast<int>(stage)], m_pObjectManager);
-
-	// チュートリアル時は後から敵を出す
-	if (stage == Game::Stage::Tutorial)
-	{
-		m_isSpown = false;
-	}
 }
 
 EnemyManager::~EnemyManager()
 {
+	/*処理無し*/
 }
 
 void EnemyManager::Init()

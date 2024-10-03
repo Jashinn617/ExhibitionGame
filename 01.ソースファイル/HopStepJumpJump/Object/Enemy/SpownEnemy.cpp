@@ -88,7 +88,7 @@ void SpownEnemy::Create()
 		// 読み取ったデータを座標に変換する
 		VECTOR pos = VGet(stof(strvec[2]), stof(strvec[3]), stof(strvec[4]));
 		VECTOR direction = VGet(stof(strvec[5]), stof(strvec[6]), stof(strvec[7]));
-		int turnTime = stof(strvec[8]);
+		int turnTime = static_cast<int>(stof(strvec[8]));
 		float speed = stof(strvec[9]);
 
 		// 高さ調整

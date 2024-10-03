@@ -5,7 +5,6 @@
 #include <list>
 #include <functional>
 
-class Input;
 class EnemyBase;
 class ItemBase;
 class ObjectBase;
@@ -26,7 +25,7 @@ public:
 	ObjectManager(Game::Stage stage);
 	virtual ~ObjectManager();
 
-	void Update(Input& input);
+	void Update();
 
 	void Draw();
 

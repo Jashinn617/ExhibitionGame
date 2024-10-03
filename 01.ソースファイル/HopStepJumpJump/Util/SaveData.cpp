@@ -88,8 +88,6 @@ void SaveData::CreateNewSaveData()
 
 void SaveData::ClearSaveData()
 {
-	ClearSaveData();
-
 	std::ofstream ofs(kSaveDataFileName, std::ios_base::binary);
 	ofs.write((char*)&m_data, sizeof(SaveData));
 }

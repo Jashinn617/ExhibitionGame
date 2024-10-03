@@ -1,5 +1,4 @@
 #include "MoveDirectionVec.h"
-#include "../Util/Input.h"
 #include "../Util/Pad.h"
 #include "CharacterData.h"
 
@@ -23,7 +22,7 @@ MoveDirectionVec::~MoveDirectionVec()
 	/*処理無し*/
 }
 
-void MoveDirectionVec::Update(Input& input_)
+void MoveDirectionVec::Update()
 {
 	//パッドアナログ情報取得
 	DINPUT_JOYSTATE input;

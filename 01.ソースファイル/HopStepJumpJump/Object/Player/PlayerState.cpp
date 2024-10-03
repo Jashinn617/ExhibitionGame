@@ -1,6 +1,5 @@
 #include "PlayerState.h"
 
-#include "../../Util/Input.h"
 #include "../../Util/Pad.h"
 #include "../../Util/SoundManager.h"
 
@@ -9,10 +8,10 @@ PlayerState::PlayerState():
 {
 }
 
-void PlayerState::Update(Input& input)
+void PlayerState::Update()
 {
 	// 状態遷移
-	StateTransition(input);
+	StateTransition();
 
 	m_pNowState.stateUpdate();
 
@@ -101,7 +100,7 @@ void PlayerState::EndState()
 	m_isAction = false;
 }
 
-void PlayerState::StateTransitionIdle(Input& input)
+void PlayerState::StateTransitionIdle()
 {
 	// アクション中の場合は何もせずに終了する
 	if (m_isAction) return;
@@ -114,7 +113,7 @@ void PlayerState::StateTransitionIdle(Input& input)
 	}
 }
 
-void PlayerState::StateTransitionWalk(Input& input)
+void PlayerState::StateTransitionWalk()
 {
 	// アクション中の場合は何もせずに終了する
 	if (m_isAction) return;
@@ -127,7 +126,7 @@ void PlayerState::StateTransitionWalk(Input& input)
 	}
 }
 
-void PlayerState::StateTransitionDash(Input& input)
+void PlayerState::StateTransitionDash()
 {
 	// アクション中の場合は何もせずに終了する
 	if (m_isAction) return;
@@ -143,7 +142,7 @@ void PlayerState::StateTransitionDash(Input& input)
 	}
 }
 
-void PlayerState::StateTransitionJump(Input& input)
+void PlayerState::StateTransitionJump()
 {
 	// アクション中の場合は何もせずに終了する
 	if (m_isAction) return;
@@ -156,13 +155,13 @@ void PlayerState::StateTransitionJump(Input& input)
 	}
 }
 
-void PlayerState::StateTransition(Input& input)
+void PlayerState::StateTransition()
 {
 	// 状態遷移
-	StateTransitionIdle(input);
-	StateTransitionWalk(input);
-	StateTransitionDash(input);
-	StateTransitionJump(input);
+	StateTransitionIdle();
+	StateTransitionWalk();
+	StateTransitionDash();
+	StateTransitionJump();
 }
 
 void PlayerState::StateChange(StateKind stateKind)

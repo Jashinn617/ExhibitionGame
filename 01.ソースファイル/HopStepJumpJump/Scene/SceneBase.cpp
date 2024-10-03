@@ -11,9 +11,9 @@ namespace
 SceneBase::SceneBase():
 	m_fadeColor(0xffffff),
 	m_fadeBright(255),
-	m_fadeSpeed(-kFadeSpeed),
-	m_transition(Transition::Delete)
+	m_fadeSpeed(-kFadeSpeed)
 {
+	// ƒ‰ƒ“ƒLƒ“ƒO‚Ìì¬
 	m_pRanking = std::make_shared<Ranking>();
 }
 
@@ -22,24 +22,9 @@ SceneBase::~SceneBase()
 	/*ˆ—–³‚µ*/
 }
 
-void SceneBase::Init()
-{
-	/*ˆ—–³‚µ*/
-}
-
-std::shared_ptr<SceneBase> SceneBase::Update(Input& input)
+std::shared_ptr<SceneBase> SceneBase::Update()
 {
 	return shared_from_this();
-}
-
-void SceneBase::Draw()
-{
-	/*ˆ—–³‚µ*/
-}
-
-void SceneBase::End()
-{
-	/*ˆ—–³‚µ*/
 }
 
 void SceneBase::UpdateFade()

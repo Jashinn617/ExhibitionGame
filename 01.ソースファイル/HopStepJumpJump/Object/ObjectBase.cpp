@@ -59,7 +59,7 @@ void ObjectBase::Init()
 	/*ˆ—–³‚µ*/
 }
 
-void ObjectBase::Update(Input& input)
+void ObjectBase::Update()
 {
 	/*ˆ—–³‚µ*/
 }

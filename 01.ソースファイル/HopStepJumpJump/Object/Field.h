@@ -2,7 +2,6 @@
 #include "ObjectBase.h"
 #include "../Util/Game.h"
 
-class Input;
 class Model;
 
 class Field : public ObjectBase
@@ -13,7 +12,7 @@ public:
 	~Field();
 
 	void Init();
-	void Update(Input& input) override final;
+	void Update() override final;
 	
 	virtual void Draw(std::shared_ptr<ToonShader> pToonShader) override final;
 

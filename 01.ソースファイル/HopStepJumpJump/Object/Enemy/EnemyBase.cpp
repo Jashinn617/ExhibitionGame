@@ -7,7 +7,6 @@
 #include "../Circle.h"
 
 #include "../../Util/Time.h"
-#include "../../Util/Input.h"
 #include "../../Util/SoundManager.h"
 
 #include "../../Effect/Effekseer3DManager.h"
@@ -27,29 +26,23 @@ namespace
 	constexpr float kEndDeadTime = 200;		// ゲーム終了後に消えてからの時間
 }
 
-EnemyBase::EnemyBase():
+EnemyBase::EnemyBase() :
 	m_colHeight(0),
 	m_isEnd(false),
 	m_isEndDead(false),
-	m_moveDirectionVec{0,0,0},
-	m_enemyToPlayerVec{0,0,0},
-	m_deadTime(0)
+	m_moveDirectionVec{ 0,0,0 },
+	m_enemyToPlayerVec{ 0,0,0 },
+	m_deadTime(std::make_shared<Time>(kDeadExistTime)),
+	m_endTime(std::make_shared<Time>(kEndTime)),
+	m_endDeadTime(std::make_shared<Time>(kEndDeadTime))
 {
 	m_info.vec = VGet(0.0f, 0.0f, 0.0f);
 	m_info.rot = VGet(0.0f, 0.0f, 0.0f);
 	m_info.modelH = -1;
 	m_info.isExist = true;
 
-	m_statusData.spd = 10;
+	m_statusData.spd = 0.0f;
 	m_objSize = 0.0f;
-
-	// 死んでからの時間
-	m_deadTime = std::make_shared<Time>(kDeadExistTime);
-	// ゲーム終了してからの時間
-	m_endTime = std::make_shared<Time>(kEndTime);
-	m_endDeadTime = std::make_shared<Time>(kEndDeadTime);
-
-	// 死亡時シェーダ
 }
 
 EnemyBase::EnemyBase(VECTOR pos, float speed) :
@@ -58,7 +51,9 @@ EnemyBase::EnemyBase(VECTOR pos, float speed) :
 	m_isEndDead(false),
 	m_moveDirectionVec{ 0,0,0 },
 	m_enemyToPlayerVec{ 0,0,0 },
-	m_deadTime(0)
+	m_deadTime(std::make_shared<Time>(kDeadExistTime)),
+	m_endTime(std::make_shared<Time>(kEndTime)),
+	m_endDeadTime(std::make_shared<Time>(kEndDeadTime))
 {
 	m_info.pos = pos;
 	m_info.vec = VGet(0.0f, 0.0f, 0.0f);
@@ -66,16 +61,8 @@ EnemyBase::EnemyBase(VECTOR pos, float speed) :
 	m_info.modelH = -1;
 	m_info.isExist = true;
 
-	m_statusData.spd = 10;
+	m_statusData.spd = 0.0f;
 	m_objSize = 0.0f;
-
-	// 死んでからの時間
-	m_deadTime = std::make_shared<Time>(kDeadExistTime);
-	// ゲーム終了してからの時間
-	m_endTime = std::make_shared<Time>(kEndTime);
-	m_endDeadTime = std::make_shared<Time>(kEndDeadTime);
-
-	// 死亡時シェーダ
 }
 
 EnemyBase::EnemyBase(VECTOR pos, VECTOR direction, int turnTime, float speed) :
@@ -84,7 +71,9 @@ EnemyBase::EnemyBase(VECTOR pos, VECTOR direction, int turnTime, float speed) :
 	m_isEndDead(false),
 	m_moveDirectionVec{ 0,0,0 },
 	m_enemyToPlayerVec{ 0,0,0 },
-	m_deadTime(0)
+	m_deadTime(std::make_shared<Time>(kDeadExistTime)),
+	m_endTime(std::make_shared<Time>(kEndTime)),
+	m_endDeadTime(std::make_shared<Time>(kEndDeadTime))
 {
 	m_info.pos = pos;
 	m_info.vec = VGet(0.0f, 0.0f, 0.0f);
@@ -92,16 +81,8 @@ EnemyBase::EnemyBase(VECTOR pos, VECTOR direction, int turnTime, float speed) :
 	m_info.modelH = -1;
 	m_info.isExist = true;
 
-	m_statusData.spd = 10;
+	m_statusData.spd = 0.0f;
 	m_objSize = 0.0f;
-
-	// 死んでからの時間
-	m_deadTime = std::make_shared<Time>(kDeadExistTime);
-	// ゲーム終了してからの時間
-	m_endTime = std::make_shared<Time>(kEndTime);
-	m_endDeadTime = std::make_shared<Time>(kEndDeadTime);
-
-	// 死亡時シェーダ
 }
 
 
@@ -115,32 +96,38 @@ void EnemyBase::Init()
 	/*処理無し*/
 }
 
-void EnemyBase::Update(Input& input)
+void EnemyBase::Update()
 {
-	if (m_isEnd) return;
-	// 移動ベクトルの計算
-	m_info.vec = MoveUpdate();
+	if (m_isEnd)
+	{
+		// 移動値を0にする
+		m_info.vec = VGet(0.0f, 0.0f, 0.0f);
+	}
+	else
+	{
+		// 移動ベクトルの計算
+		m_info.vec = MoveUpdate();
 
-	// モデル更新
-	m_pModel->Update();
+		// モデル更新
+		m_pModel->Update();
 
-	// 移動ベクトルを現在座標に足す
-	m_info.pos = VAdd(m_info.pos, m_info.vec);
+		// 移動ベクトルを現在座標に足す
+		m_info.pos = VAdd(m_info.pos, m_info.vec);
 
-	// 座標の設定
-	m_pModel->SetPos(m_info.pos);
+		// 座標の設定
+		m_pModel->SetPos(m_info.pos);
 
-	// 角度更新
-	m_pModel->SetRot(VGet(0.0f, m_angle * DX_PI_F, 0.0f));
-
-	// シェーダ更新
-
+		// 角度更新
+		m_pModel->SetRot(VGet(0.0f, m_angle * DX_PI_F, 0.0f));
+	}
 }
 
 void EnemyBase::Draw(std::shared_ptr<ToonShader> pToonShader)
 {
+	// モデルの描画
 	for (int i = 0; i < MV1GetTriangleListNum(m_pModel->GetModelHandle()); i++)
 	{
+		// シェーダの頂点タイプの取得
 		int shaderType = MV1GetTriangleListVertexType(m_pModel->GetModelHandle(), i);
 
 		pToonShader->SetShader(shaderType);
@@ -148,6 +135,7 @@ void EnemyBase::Draw(std::shared_ptr<ToonShader> pToonShader)
 	}
 	pToonShader->ShaderEnd();
 
+	// 当たり判定の描画
 	m_pCircle->DebugDraw();
 }
 
@@ -158,8 +146,8 @@ void EnemyBase::StageClear()
 
 void EnemyBase::GameEnd()
 {
+	// ゲームの終了フラグを立てる
 	m_isEnd = true;
-	
 
 	// 一定時間たったら消える
 	if (m_endTime->Update())
@@ -168,16 +156,18 @@ void EnemyBase::GameEnd()
 		Effekseer3DManager::GetInstance().Add("GameEndDead", 
 			Effekseer3DManager::PlayType::Normal, this, m_info.pos);
 
-
+		// 死亡処理
 		OnDead();
+
 		// 同じSEが鳴ってなかった場合
 		if(!SoundManager::GetInstance().IsDesignationCheckPlaySound("EnemyEndDead"))
 		{
-			// ボンって感じのSEを鳴らす
+			// SEを鳴らす
 			SoundManager::GetInstance().Play("EnemyEndDead");
 			
 		}
 		
+		// ゲーム終了時の処理を終える
 		m_isGameEnd = true;
 	}	
 }
@@ -194,16 +184,16 @@ void EnemyBase::OnDamage(VECTOR targetPos)
 	// エフェクトを流す
 	Effekseer3DManager::GetInstance().Add("EnemyDead"
 		, Effekseer3DManager::PlayType::Normal, this, m_info.pos);
-
-
 	
+	// 死亡処理
 	OnDead();
 }
 
 void EnemyBase::OnDead()
 {
+	// 死亡したフラグを立てる
 	m_isDead = true;
-
+	// 存在を消す
 	m_info.isExist = false;
 }
 
@@ -217,11 +207,12 @@ void EnemyBase::InitMoveSpeed(float moveSpeed)
 
 void EnemyBase::AngleUpdate()
 {
+	// atan2で角度の計算をする為Z軸を反転する
 	float angleZ = m_moveDirectionVec.z * -1;
-	//向きたい方向
+	//向きたい方向の設定
 	float nextAngle = atan2(m_moveDirectionVec.x, angleZ);
 
-	//滑らかに指定した方向に向くための関数
+	//滑らかに指定した方向に向く
 	SmoothAngle(m_angle, nextAngle);
 }
 
@@ -232,5 +223,6 @@ void EnemyBase::MoveDirectionUpdate()
 
 VECTOR EnemyBase::MoveUpdate()
 {
+	/*処理無し*/
 	return VGet(0.0f, 0.0f, 0.0f);
 }

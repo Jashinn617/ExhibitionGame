@@ -26,7 +26,7 @@ public:
 	~Player();
 
 	void Init();
-	void Update(Input& input) override final;
+	void Update() override final;
 	virtual void Draw(std::shared_ptr<ToonShader> pToonShader);
 
 	void Draw2D() override final;
@@ -84,13 +84,13 @@ private:	// 関数
 	/// <summary>
 	/// 移動方向の更新
 	/// </summary>
-	void MoveDirectionUpdate(Input& input);
+	void MoveDirectionUpdate();
 
 	/// <summary>
 	/// 移動
 	/// </summary>
 	/// <returns></returns>
-	VECTOR MoveUpdate(Input& input);
+	VECTOR MoveUpdate();
 
 private:	// メンバ関数用関数
 
@@ -124,6 +124,5 @@ private:	// 変数
 	std::shared_ptr<PlayerState> m_pState;		// 状態のポインタ
 	std::shared_ptr<Time> m_pInvincibleTime;	// 攻撃を食らった後の無敵時間
 	std::shared_ptr<Camera> m_pCamera;			// カメラポインタの取得
-	//std::shared_ptr<DamageShader> m_pDamageShader;	// ダメージシェーダ
 };
 

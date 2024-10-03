@@ -10,9 +10,9 @@
 
 namespace
 {
-	constexpr float kModelScalse = 0.3;	// モデルスケール
-	constexpr float kEnemySize = 20;	// サイズ
-	constexpr float kHeight = 20.0f;	// 高さ
+	constexpr float kModelScalse = 0.3f;	// モデルスケール
+	constexpr float kEnemySize = 20;		// サイズ
+	constexpr float kHeight = 20.0f;		// 高さ
 }
 
 EnemyBee::EnemyBee(VECTOR pos, VECTOR direction, int turnTime, float speed)
@@ -42,10 +42,15 @@ EnemyBee::~EnemyBee()
 
 void EnemyBee::Init()
 {
+	// モデルポインタの作成
 	m_pModel = std::make_shared<Model>(m_modelH);
+	// アニメーションの設定
 	m_pModel->SetAnim(m_animData.idle, true, true);
+	// スケールの設定
 	m_pModel->SetScale(VGet(kModelScalse, kModelScalse, kModelScalse));
+	// 角度の初期化
 	m_pModel->SetRot(m_info.rot);
+	// 座標の初期化
 	m_pModel->SetPos(m_info.pos);
 }
 

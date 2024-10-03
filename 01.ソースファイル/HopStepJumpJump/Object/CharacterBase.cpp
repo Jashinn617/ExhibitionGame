@@ -1,6 +1,5 @@
 #include "CharacterBase.h"
 #include "Circle.h"
-#include "../Util/Input.h"
 
 #include "Item/ItemBase.h"
 
@@ -38,7 +37,7 @@ void CharacterBase::Init()
 	/*ˆ—–³‚µ*/
 }
 
-void CharacterBase::Update(Input& input)
+void CharacterBase::Update()
 {
 	/*ˆ—–³‚µ*/
 }

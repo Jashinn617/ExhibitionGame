@@ -39,7 +39,7 @@ public:
 	virtual ~CharacterBase();
 
 	virtual void Init();
-	virtual void Update(Input& input);
+	virtual void Update();
 
 	virtual void Draw(std::shared_ptr<ToonShader> pToonShader);
 
